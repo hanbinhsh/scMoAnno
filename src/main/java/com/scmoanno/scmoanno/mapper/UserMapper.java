@@ -12,4 +12,6 @@ public interface UserMapper {
     public Scmoannouser findUserByPassword(String password);
 
     void register(Scmoannouser scmoannouser);
+    Scmoannouser findUserByUserEmail(String email);
+    Scmoannouser findUserByUserPhone(String phone);
 }

@@ -33,8 +33,22 @@ public class UserController {
 
     @PostMapping("/register")
     public Result<String> register(@RequestBody Scmoannouser scmoannouser) {
-        userServer.register(scmoannouser);
-        return Result.success();
+        if(userServer.findUserByUserName(scmoannouser.getUserName())!=null)
+        {
+            return Result.error("The username already exists!");
+        }
+        else if(userServer.findUserByEmail(scmoannouser.getEmail())!=null)
+        {
+            return Result.error("The email address is registered!");
+        }
+        else if(userServer.findUserByPhone(scmoannouser.getPhone())!=null)
+        {
+            return Result.error("The phone number is registered!");
+        }
+        else{
+            userServer.register(scmoannouser);
+            return Result.success();
+        }
     }
 
 

@@ -17,4 +17,10 @@
     <select id="findUserByPassword" resultType="com.scmoanno.scmoanno.entity.Scmoannouser">
         select * from scmoannouser where psw = #{password}
     </select>
+    <select id="findUserByUserEmail" resultType="com.scmoanno.scmoanno.entity.Scmoannouser">
+        select * from scmoannouser where email = #{email}
+    </select>
+    <select id="findUserByUserPhone" resultType="com.scmoanno.scmoanno.entity.Scmoannouser">
+        select * from scmoannouser where phone = #{phone}
+    </select>
 </mapper>

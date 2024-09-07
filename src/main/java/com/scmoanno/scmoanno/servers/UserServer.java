@@ -10,4 +10,6 @@ public interface UserServer {
     public Scmoannouser findUserByPassword(String password);
 
     void register(Scmoannouser scmoannouser);
+    Scmoannouser findUserByEmail(String email);
+    Scmoannouser findUserByPhone(String phone);
 }

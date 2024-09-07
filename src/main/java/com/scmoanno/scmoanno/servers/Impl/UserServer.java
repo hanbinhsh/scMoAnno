@@ -33,4 +33,14 @@ public class UserServer implements com.scmoanno.scmoanno.servers.UserServer {
     public void register(Scmoannouser scmoannouser) {
         userMapper.register(scmoannouser);
     }
+
+    @Override
+    public Scmoannouser findUserByEmail(String email) {
+        return userMapper.findUserByUserEmail(email);
+    }
+
+    @Override
+    public Scmoannouser findUserByPhone(String phone) {
+        return userMapper.findUserByUserPhone(phone);
+    }
 }
