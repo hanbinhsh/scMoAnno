@@ -4,4 +4,7 @@
 
 <mapper namespace="com.scmoanno.scmoanno.mapper.TaskMapper">
 
+    <select id="findTasksByUserId" resultType="com.scmoanno.scmoanno.entity.Scmoannotask">
+        select * from scmoannotask where uploader_id = #{id}
+    </select>
 </mapper>
