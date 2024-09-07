@@ -4,4 +4,7 @@
 
 <mapper namespace="com.scmoanno.scmoanno.mapper.UserMapper">
 
+    <select id="findUsers" resultType="com.scmoanno.scmoanno.entity.Scmoannouser">
+        select * from scmoannouser
+    </select>
 </mapper>
