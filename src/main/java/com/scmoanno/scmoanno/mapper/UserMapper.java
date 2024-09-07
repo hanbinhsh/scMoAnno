@@ -9,5 +9,5 @@ import java.util.List;
 public interface UserMapper {
     public List<Scmoannouser> findUsers();
     public Scmoannouser findUserByUserName(String userName);
-    public Scmoannouser findUserByPassword(String password);
+    public Scmoannouser findUserByUserNameAndPassword(String userName, String password);
 }

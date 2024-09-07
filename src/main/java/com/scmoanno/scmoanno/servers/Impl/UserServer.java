@@ -20,12 +20,14 @@ public class UserServer implements com.scmoanno.scmoanno.servers.UserServer {
     }
 
     @Override
+    @Transactional
     public Scmoannouser findUserByUserName(String userName) {
         return userMapper.findUserByUserName(userName);
     }
 
     @Override
-    public Scmoannouser findUserByPassword(String password) {
-        return userMapper.findUserByPassword(password);
+    @Transactional
+    public Scmoannouser findUserByUserNameAndPassword(String userName, String password) {
+        return userMapper.findUserByUserNameAndPassword(userName, password);
     }
 }
