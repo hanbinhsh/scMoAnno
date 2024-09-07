@@ -7,6 +7,7 @@ import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,4 +30,12 @@ public class UserController {
         else
             return Result.error("the username or password is wrong!");
     }
+
+    @PostMapping("/register")
+    public Result<String> register(@RequestBody Scmoannouser scmoannouser) {
+        userServer.register(scmoannouser);
+        return Result.success();
+    }
+
+
 }

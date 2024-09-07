@@ -3,6 +3,10 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.scmoanno.scmoanno.mapper.UserMapper">
+    <insert id="register">
+        insert into scmoannouser(user_name, psw, email, is_admin, phone)
+        values (#{userName},#{psw},#{email},#{isAdmin},#{phone})
+    </insert>
 
     <select id="findUsers" resultType="com.scmoanno.scmoanno.entity.Scmoannouser">
         select * from scmoannouser

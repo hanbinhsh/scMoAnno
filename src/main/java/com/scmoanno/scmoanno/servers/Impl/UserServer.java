@@ -28,4 +28,9 @@ public class UserServer implements com.scmoanno.scmoanno.servers.UserServer {
     public Scmoannouser findUserByPassword(String password) {
         return userMapper.findUserByPassword(password);
     }
+
+    @Override
+    public void register(Scmoannouser scmoannouser) {
+        userMapper.register(scmoannouser);
+    }
 }
