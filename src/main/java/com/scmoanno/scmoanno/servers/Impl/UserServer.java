@@ -18,4 +18,14 @@ public class UserServer implements com.scmoanno.scmoanno.servers.UserServer {
     public List<Scmoannouser> findUsers() {
         return userMapper.findUsers();
     }
+
+    @Override
+    public Scmoannouser findUserByUserName(String userName) {
+        return userMapper.findUserByUserName(userName);
+    }
+
+    @Override
+    public Scmoannouser findUserByPassword(String password) {
+        return userMapper.findUserByPassword(password);
+    }
 }

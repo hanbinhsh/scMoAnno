@@ -8,4 +8,6 @@ import java.util.List;
 @Mapper
 public interface UserMapper {
     public List<Scmoannouser> findUsers();
+    public Scmoannouser findUserByUserName(String userName);
+    public Scmoannouser findUserByPassword(String password);
 }

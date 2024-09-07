@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface UserServer {
     public List<Scmoannouser> findUsers();
+    public Scmoannouser findUserByUserName(String userName);
+    public Scmoannouser findUserByPassword(String password);
 }

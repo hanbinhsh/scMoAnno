@@ -21,4 +21,13 @@ public class UserController {
     public Result<List<Scmoannouser>> findUsers() {
         return Result.success(userServer.findUsers());
     }
+
+    @RequestMapping("/userLogin")
+    public Result userLogin(String userName, String password) {
+        if(userServer.findUserByUserName(userName) != null && userServer.findUserByPassword(password) != null) {
+            return Result.success();
+        }
+        else
+            return Result.error("the username or password is wrong!");
+    }
 }
