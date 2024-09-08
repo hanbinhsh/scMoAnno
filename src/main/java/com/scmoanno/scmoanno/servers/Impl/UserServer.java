@@ -26,6 +26,11 @@ public class UserServer implements com.scmoanno.scmoanno.servers.UserServer {
     }
 
     @Override
+    public void deleteUserByUserID(long userID) {
+        userMapper.deleteUserByUserID(userID);
+    }
+
+    @Override
     @Transactional
     public Scmoannouser findUserByUserNameAndPassword(String userName, String password) {
         return userMapper.findUserByUserNameAndPassword(userName, password);

@@ -9,9 +9,9 @@ import java.util.List;
 public interface UserMapper {
     public List<Scmoannouser> findUsers();
     public Scmoannouser findUserByUserName(String userName);
-
     void register(Scmoannouser scmoannouser);
     public Scmoannouser findUserByUserNameAndPassword(String userName, String password);
-    Scmoannouser findUserByUserEmail(String email);
-    Scmoannouser findUserByUserPhone(String phone);
+    public Scmoannouser findUserByUserEmail(String email);
+    public Scmoannouser findUserByUserPhone(String phone);
+    public void deleteUserByUserID(long userID);
 }

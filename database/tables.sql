@@ -34,3 +34,14 @@ BEGIN
 END;
 $$
 DELIMITER ;
+
+DELIMITER //
+CREATE TRIGGER before_user_delete
+BEFORE DELETE ON scMoAnnoUser
+FOR EACH ROW
+BEGIN
+  -- 删除即将被删除的用户ID的所有任务
+  DELETE FROM scMoAnnoTask WHERE uploader_id = OLD.user_id;
+END //
+DELIMITER ;
+

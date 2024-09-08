@@ -34,6 +34,12 @@ public class UserController {
             return Result.error("the username or password is wrong!");
     }
 
+    @RequestMapping("/deleteUserByUserID")
+    @CrossOrigin(origins = "*")
+    public void deleteUserByUserID(@RequestParam long userID){
+        userServer.deleteUserByUserID(userID);
+    }
+
     @PostMapping("/register")
     public Result<String> register(@RequestBody Scmoannouser scmoannouser) {
         if(userServer.findUserByUserName(scmoannouser.getUserName())!=null)
@@ -53,6 +59,4 @@ public class UserController {
             return Result.success();
         }
     }
-
-
 }
