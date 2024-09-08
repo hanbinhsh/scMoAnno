@@ -21,3 +21,16 @@ create table `scMoAnnoTask`(
   `uploader_id` int 							NOT NULL	COMMENT '上传者ID',
   FOREIGN KEY (`uploader_id`) REFERENCES scMoAnnoUser(`user_id`)
 );
+
+-- TRIGGER --
+-- 用户密码加密
+DELIMITER $$
+DROP TRIGGER IF EXISTS before_user_insert $$
+CREATE TRIGGER before_user_insert
+BEFORE INSERT ON `scMoAnnoUser`
+FOR EACH ROW
+BEGIN
+  SET NEW.psw = SHA2(NEW.psw, 256);
+END;
+$$
+DELIMITER ;

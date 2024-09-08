@@ -15,7 +15,7 @@
         select * from scmoannouser where user_name = #{userName}
     </select>
     <select id="findUserByUserNameAndPassword" resultType="com.scmoanno.scmoanno.entity.Scmoannouser">
-        select * from scmoannouser where user_name = #{userName} and psw = #{password}
+        select * from scmoannouser where user_name = #{userName} and psw = SHA2(#{password},256)
     </select>
     <select id="findUserByUserEmail" resultType="com.scmoanno.scmoanno.entity.Scmoannouser">
         select * from scmoannouser where email = #{email}
