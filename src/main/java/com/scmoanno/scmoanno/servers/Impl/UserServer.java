@@ -50,4 +50,9 @@ public class UserServer implements com.scmoanno.scmoanno.servers.UserServer {
     public Scmoannouser findUserByPhone(String phone) {
         return userMapper.findUserByUserPhone(phone);
     }
+
+    @Override
+    public void updateUser(Scmoannouser scmoannouser) {
+        userMapper.updateUser(scmoannouser);
+    }
 }

@@ -40,6 +40,12 @@ public class UserController {
         userServer.deleteUserByUserID(userID);
     }
 
+    @RequestMapping("/updateUser")
+    @CrossOrigin(origins = "*")
+    public void updateUser(@RequestBody Scmoannouser scmoannouser) {
+        userServer.updateUser(scmoannouser);
+    }
+
     @PostMapping("/register")
     public Result<String> register(@RequestBody Scmoannouser scmoannouser) {
         if(userServer.findUserByUserName(scmoannouser.getUserName())!=null)

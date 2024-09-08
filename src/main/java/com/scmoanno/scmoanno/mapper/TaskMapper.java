@@ -8,6 +8,6 @@ import java.util.List;
 
 @Mapper
 public interface TaskMapper {
-    public List<Scmoannotask> findTasksByUserId(@Param("id") Long id);
-    public void deleteTasksByTaskId(@Param("id") Long id);
+    List<Scmoannotask> findTasksByUserId(@Param("id") Long id);
+    void deleteTasksByTaskId(@Param("id") Long id);
 }

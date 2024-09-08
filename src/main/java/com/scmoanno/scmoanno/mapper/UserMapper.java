@@ -7,11 +7,12 @@ import java.util.List;
 
 @Mapper
 public interface UserMapper {
-    public List<Scmoannouser> findUsers();
-    public Scmoannouser findUserByUserName(String userName);
+    List<Scmoannouser> findUsers();
+    Scmoannouser findUserByUserName(String userName);
     void register(Scmoannouser scmoannouser);
-    public Scmoannouser findUserByUserNameAndPassword(String userName, String password);
-    public Scmoannouser findUserByUserEmail(String email);
-    public Scmoannouser findUserByUserPhone(String phone);
-    public void deleteUserByUserID(long userID);
+    Scmoannouser findUserByUserNameAndPassword(String userName, String password);
+    Scmoannouser findUserByUserEmail(String email);
+    Scmoannouser findUserByUserPhone(String phone);
+    void deleteUserByUserID(long userID);
+    void updateUser(Scmoannouser scmoannouser);
 }
