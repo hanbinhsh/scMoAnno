@@ -3,6 +3,9 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.scmoanno.scmoanno.mapper.TaskMapper">
+    <delete id="deleteTasksByTaskId">
+        delete scmoannotask from scmoannotask where task_id = #{id}
+    </delete>
 
     <select id="findTasksByUserId" resultType="com.scmoanno.scmoanno.entity.Scmoannotask">
         select * from scmoannotask where uploader_id = #{id}

@@ -21,4 +21,11 @@ public class TaskController {
     public Result<List<Scmoannotask>> findTasksByUserID(@RequestParam long userID) {
         return Result.success(taskServer.findTasksByUserId(userID));
     }
+
+    @RequestMapping("/deleteTaskByID")
+    @CrossOrigin(origins = "*")
+    public Result deleteTaskByID(@RequestParam long taskID) {
+        taskServer.deleteTasksByTaskId(taskID);
+        return Result.success();
+    }
 }

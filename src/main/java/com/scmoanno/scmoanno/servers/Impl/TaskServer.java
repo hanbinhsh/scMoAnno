@@ -18,4 +18,9 @@ public class TaskServer implements com.scmoanno.scmoanno.servers.TaskServer {
     public List<Scmoannotask> findTasksByUserId(Long id) {
         return taskMapper.findTasksByUserId(id);
     }
+
+    @Override
+    public void deleteTasksByTaskId(Long id) {
+        taskMapper.deleteTasksByTaskId(id);
+    }
 }
