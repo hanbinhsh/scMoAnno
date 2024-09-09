@@ -65,4 +65,10 @@ public class UserController {
             return Result.success();
         }
     }
+
+    @RequestMapping("/findUserByUserId")
+    public Result<Scmoannouser> findUserByUserId(@RequestBody Map<String, String> map) {
+        Scmoannouser user = userServer.findUserByUserId(Long.parseLong(map.get("userId")));
+            return Result.success(user);
+    }
 }

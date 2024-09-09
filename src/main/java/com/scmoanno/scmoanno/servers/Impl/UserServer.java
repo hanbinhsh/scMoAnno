@@ -55,4 +55,7 @@ public class UserServer implements com.scmoanno.scmoanno.servers.UserServer {
     public void updateUser(Scmoannouser scmoannouser) {
         userMapper.updateUser(scmoannouser);
     }
+
+    @Override
+    public Scmoannouser findUserByUserId(long userId){return userMapper.findUserByUserId(userId);}
 }

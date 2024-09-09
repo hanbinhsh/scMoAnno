@@ -1,7 +1,7 @@
 package com.scmoanno.scmoanno.entity;
 
 
-public class Scmoannotask {
+public class  Scmoannotask {
 
   private long taskId;
   private String taskName;
