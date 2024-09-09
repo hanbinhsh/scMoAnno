@@ -10,6 +10,20 @@ create table `scMoAnnoUser`(
   `phone` varchar(32) UNIQUE				 	NOT NULL	COMMENT '电话号码'
 );
 
+drop table if exists `scMoAnnoFiles`;
+create table `scMoAnnoFiles`(
+   `file_id` int AUTO_INCREMENT PRIMARY KEY  	NOT NULL	COMMENT '文件ID',
+   `scRNA-seq_file` varchar(100) UNIQUE			NOT NULL	COMMENT 'scRNA-seq文件名',
+    `scATAC-seq_file` varchar(100) UNIQUE			NOT NULL	COMMENT 'scATAC-seq文件名',
+    `Tag_file` varchar(100) UNIQUE				NOT NULL	COMMENT 'Tag文件名',
+    `task_id` int                                 NOT NULL    COMMENT '任务ID',
+    `upload_time` datetime 						NOT NULL	COMMENT '上传时间',
+    `uploader_id` int								NOT NULL	COMMENT '上传者ID',
+    `path` text									NOT NULL	COMMENT '文件路径（Windows）',
+    FOREIGN KEY (`uploader_id`) REFERENCES scMoAnnoUser(`user_id`),
+    FOREIGN KEY (`task_id`) REFERENCES scMoAnnoTask(`task_id`)
+);
+
 drop table if exists `scMoAnnoTask`;
 create table `scMoAnnoTask`(
   `task_id` int AUTO_INCREMENT PRIMARY KEY  	NOT NULL	COMMENT '任务ID',
@@ -21,6 +35,8 @@ create table `scMoAnnoTask`(
   `uploader_id` int 							NOT NULL	COMMENT '上传者ID',
   FOREIGN KEY (`uploader_id`) REFERENCES scMoAnnoUser(`user_id`)
 );
+
+
 
 drop table if exists `feedback`;
 create table `feedback`(

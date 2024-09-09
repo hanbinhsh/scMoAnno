@@ -23,4 +23,7 @@ public class TaskServer implements com.scmoanno.scmoanno.servers.TaskServer {
     public void deleteTasksByTaskId(Long id) {
         taskMapper.deleteTasksByTaskId(id);
     }
+
+    @Override
+    public void insertTask(Scmoannotask task){taskMapper.insertTask(task); }
 }

@@ -10,4 +10,6 @@ import java.util.List;
 public interface TaskMapper {
     List<Scmoannotask> findTasksByUserId(@Param("id") Long id);
     void deleteTasksByTaskId(@Param("id") Long id);
+
+    void insertTask(Scmoannotask task);
 }
