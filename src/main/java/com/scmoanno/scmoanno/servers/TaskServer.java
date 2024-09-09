@@ -7,9 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface TaskServer {
-    List<Scmoannotask> findTasksByUserId(@Param("id") Long id);
-    public void deleteTasksByTaskId(@Param("id") Long id);
-    public void insertTask(Scmoannotask task);
+    void insertTask(Scmoannotask task);
     List<Scmoannotask> findTasksByUserId(Long id);
     void deleteTasksByTaskId(Long id);
     List<Scmoannotask> findAllTasks();
