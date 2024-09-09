@@ -26,8 +26,6 @@ drop table if exists `feedback`;
 create table `feedback`(
   `feedback_id` int AUTO_INCREMENT PRIMARY KEY      NOT NULL	COMMENT '反馈ID',
   `user_id` int 								  	NOT NULL	COMMENT '用户ID',
-  `user_name` varchar(20) 							NOT NULL	COMMENT '用户名',
-  `email` varchar(32) UNIQUE 						NOT NULL	COMMENT '电子邮件',
   `subject` varchar(32)								NOT NULL	COMMENT '反馈主题',
   `message` text									NOT NULL	COMMENT '反馈信息',
   `created_time` datetime				 			NOT NULL	COMMENT '反馈时间',
