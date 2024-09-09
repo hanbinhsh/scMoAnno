@@ -15,7 +15,7 @@ create table `scMoAnnoTask`(
   `task_id` int AUTO_INCREMENT PRIMARY KEY  	NOT NULL	COMMENT '任务ID',
   `task_name` varchar(20) 						NOT NULL	COMMENT '任务名',
   `start_time` datetime				 			NOT NULL	COMMENT '开始时间',
-  `end_time` datetime				 			NOT NULL	COMMENT '结束时间',
+  `end_time` datetime				 						COMMENT '结束时间',
   `status` tinyint DEFAULT 0					NOT NULL	COMMENT '标志位',
   `details` text								NOT NULL	COMMENT '详情',
   `uploader_id` int 							NOT NULL	COMMENT '上传者ID',
