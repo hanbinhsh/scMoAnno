@@ -15,4 +15,5 @@ public interface UserMapper {
     Scmoannouser findUserByUserPhone(String phone);
     void deleteUserByUserID(long userID);
     void updateUser(Scmoannouser scmoannouser);
+    Scmoannouser findUserByUserId(long userId);
 }

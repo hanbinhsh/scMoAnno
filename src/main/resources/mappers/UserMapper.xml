@@ -37,4 +37,7 @@
     <select id="findUserByUserPhone" resultType="com.scmoanno.scmoanno.entity.Scmoannouser">
         select * from scmoannouser where phone = #{phone}
     </select>
+    <select id="findUserByUserId" resultType="com.scmoanno.scmoanno.entity.Scmoannouser">
+        select * from scmoannouser where user_id=#{userId}
+    </select>
 </mapper>
