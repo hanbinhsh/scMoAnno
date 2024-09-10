@@ -8,4 +8,15 @@
         insert into feedback(user_id, subject, message, created_time)
         values (#{userId}, #{subject}, #{message}, #{createTime})
     </insert>
+    <delete id="deleteFeedback">
+        delete from feedback where feedback_id = #{feedbackId}
+    </delete>
+    <select id="getFeedback" resultType="com.scmoanno.scmoanno.entity.Feedback">
+        select * from feedback
+    </select>
+    <select id="findAllFeedbackWithUserInformation" resultType="java.util.Map">
+        SELECT u.*, t.*
+        FROM scMoAnnoUser u
+                 JOIN feedback t ON u.user_id = t.user_id;
+    </select>
 </mapper>
