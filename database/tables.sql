@@ -56,13 +56,16 @@ END;
 $$
 DELIMITER ;
 
+DROP TRIGGER IF EXISTS before_user_delete;
 DELIMITER //
 CREATE TRIGGER before_user_delete
-BEFORE DELETE ON scMoAnnoUser
-FOR EACH ROW
+    BEFORE DELETE ON scMoAnnoUser
+    FOR EACH ROW
 BEGIN
-  -- 删除即将被删除的用户ID的所有任务
-  DELETE FROM scMoAnnoTask WHERE uploader_id = OLD.user_id;
+    -- 删除即将被删除的用户ID的所有任务
+    DELETE FROM scMoAnnoTask WHERE uploader_id = OLD.user_id;
+    -- 删除即将被删除的用户ID的所有反馈
+    DELETE FROM feedback WHERE user_id = OLD.user_id;
 END //
 DELIMITER ;
 
