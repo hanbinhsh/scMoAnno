@@ -7,6 +7,9 @@ import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class FeedbackServer implements com.scmoanno.scmoanno.servers.FeedbackServer {
@@ -17,5 +20,20 @@ public class FeedbackServer implements com.scmoanno.scmoanno.servers.FeedbackSer
     public void insert(Feedback feedback) {
         feedback.setCreateTime(new Timestamp(System.currentTimeMillis()));
         feedbackMapper.insert(feedback);
+    }
+
+    @Override
+    public List<Feedback> getFeedback() {
+        return feedbackMapper.getFeedback();
+    }
+
+    @Override
+    public void deleteFeedback(long feedbackId) {
+        feedbackMapper.deleteFeedback(feedbackId);
+    }
+
+    @Override
+    public Map<Object, Object> findAllFeedbackWithUserInformation() {
+        return feedbackMapper.findAllFeedbackWithUserInformation();
     }
 }

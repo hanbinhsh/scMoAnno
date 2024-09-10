@@ -7,7 +7,8 @@ create table `scMoAnnoUser`(
   `psw` varchar(64)  							NOT NULL	COMMENT '用户密码',
   `email` varchar(32) UNIQUE 					NOT NULL	COMMENT '电子邮件',
   `is_admin` boolean DEFAULT false	 			NOT NULL	COMMENT '是否是管理员',
-  `phone` varchar(32) UNIQUE				 	NOT NULL	COMMENT '电话号码'
+  `phone` varchar(32) UNIQUE				 	NOT NULL	COMMENT '电话号码',
+  `avatar` LONGBLOB											COMMENT '用户头像'
 );
 
 drop table if exists `scMoAnnoFiles`;
@@ -35,8 +36,6 @@ create table `scMoAnnoTask`(
   `uploader_id` int 							NOT NULL	COMMENT '上传者ID',
   FOREIGN KEY (`uploader_id`) REFERENCES scMoAnnoUser(`user_id`)
 );
-
-
 
 drop table if exists `feedback`;
 create table `feedback`(
