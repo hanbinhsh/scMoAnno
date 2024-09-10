@@ -3,6 +3,10 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.scmoanno.scmoanno.mapper.TaskMapper">
+    <insert id="insertTask">
+        insert into scMoAnnoTask(task_name, start_time, end_time, uploader_id)
+        values(#{taskName},#{startTime},#{endTime},#{uploaderId})
+    </insert>
     <update id="updateTaskStatus">
         update scmoannotask
         set status = #{status}

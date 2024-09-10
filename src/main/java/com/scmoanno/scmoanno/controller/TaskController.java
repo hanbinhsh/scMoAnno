@@ -6,6 +6,8 @@ import com.scmoanno.scmoanno.servers.TaskServer;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Timestamp;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -13,6 +15,19 @@ import java.util.Map;
 public class TaskController {
     @Resource
     private TaskServer taskServer;
+
+    @RequestMapping("/insertTask")
+    @CrossOrigin(origins = "*")
+    public Result insertTask(@RequestBody Map<String, String> map) {
+        Timestamp timestamp = Timestamp.from(ZonedDateTime.now().toInstant());
+        Scmoannotask task = new Scmoannotask();
+        task.setTaskName(map.get("taskName"));
+        task.setStartTime(timestamp);
+        task.setEndTime(timestamp);
+        task.setUploaderId(Long.parseLong(map.get("userId")));
+        taskServer.insertTask(task);
+        return Result.success();
+    }
 
     @RequestMapping("/findTasksByUserID")
     @CrossOrigin(origins = "*")
