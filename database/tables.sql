@@ -8,7 +8,7 @@ create table `scMoAnnoUser`(
   `email` varchar(32) UNIQUE 					NOT NULL	COMMENT '电子邮件',
   `is_admin` boolean DEFAULT false	 			NOT NULL	COMMENT '是否是管理员',
   `phone` varchar(32) UNIQUE				 	NOT NULL	COMMENT '电话号码',
-  `avatar` BLOB												COMMENT '用户头像'
+  `avatar` LONGBLOB											COMMENT '用户头像'
 );
 
 drop table if exists `scMoAnnoFiles`;
