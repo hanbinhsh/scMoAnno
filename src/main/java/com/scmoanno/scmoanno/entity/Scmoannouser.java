@@ -1,6 +1,5 @@
 package com.scmoanno.scmoanno.entity;
 
-
 public class Scmoannouser {
 
   private long userId;
@@ -9,6 +8,8 @@ public class Scmoannouser {
   private String email;
   private long isAdmin;
   private String phone;
+  private byte[] avatar;
+  private String avatarBase64; // 头像的 Base64 编码字符串
 
 
   public long getUserId() {
@@ -64,4 +65,20 @@ public class Scmoannouser {
     this.phone = phone;
   }
 
+
+  public byte[] getAvatar() {
+    return avatar;
+  }
+
+  public void setAvatar(byte[] avatar) {
+    this.avatar = avatar;
+  }
+
+    public String getAvatarBase64() {
+        return avatarBase64;
+    }
+
+    public void setAvatarBase64(String avatarBase64) {
+        this.avatarBase64 = avatarBase64;
+    }
 }

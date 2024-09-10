@@ -17,6 +17,9 @@
         <if test="psw != null and psw != ''">
             , psw = SHA2(#{psw},256)
         </if>
+        <if test="avatar != null and avatar != ''">
+            , avatar = #{avatar}
+        </if>
         WHERE user_id = #{userId};
     </update>
     <delete id="deleteUserByUserID">

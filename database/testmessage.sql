@@ -1,7 +1,7 @@
 use scMoAnnoDB;
 
 INSERT INTO `scMoAnnoUser` (`user_name`, `psw`, `email`, `is_admin`, `phone`) VALUES
-('Alice', '3', 'alice@example.com', false, '123-456-7890'),
+('Alice', '3', 'alice@example.com', true, '123-456-7890'),
 ('Bob', '3', 'bob@example.com', true, '234-567-8901'),
 ('Charlie', '3', 'charlie@example.com', false, '345-678-9012'),
 ('David', '3', 'david@example.com', false, '456-789-0123');
