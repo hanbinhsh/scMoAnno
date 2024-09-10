@@ -11,30 +11,26 @@ create table `scMoAnnoUser`(
   `avatar` LONGBLOB											COMMENT '用户头像'
 );
 
-drop table if exists `scMoAnnoFiles`;
-create table `scMoAnnoFiles`(
-   `file_id` int AUTO_INCREMENT PRIMARY KEY  	NOT NULL	COMMENT '文件ID',
-   `scRNA-seq_file` varchar(100) UNIQUE			NOT NULL	COMMENT 'scRNA-seq文件名',
-    `scATAC-seq_file` varchar(100) UNIQUE			NOT NULL	COMMENT 'scATAC-seq文件名',
-    `Tag_file` varchar(100) UNIQUE				NOT NULL	COMMENT 'Tag文件名',
-    `task_id` int                                 NOT NULL    COMMENT '任务ID',
-    `upload_time` datetime 						NOT NULL	COMMENT '上传时间',
-    `uploader_id` int								NOT NULL	COMMENT '上传者ID',
-    `path` text									NOT NULL	COMMENT '文件路径（Windows）',
-    FOREIGN KEY (`uploader_id`) REFERENCES scMoAnnoUser(`user_id`),
-    FOREIGN KEY (`task_id`) REFERENCES scMoAnnoTask(`task_id`)
-);
-
 drop table if exists `scMoAnnoTask`;
 create table `scMoAnnoTask`(
   `task_id` int AUTO_INCREMENT PRIMARY KEY  	NOT NULL	COMMENT '任务ID',
-  `task_name` varchar(20) 						NOT NULL	COMMENT '任务名',
+  `task_name` varchar(20) UNIQUE				NOT NULL	COMMENT '任务名',
   `start_time` datetime				 			NOT NULL	COMMENT '开始时间',
-  `end_time` datetime				 						COMMENT '结束时间',
+  `end_time` datetime					 		NOT NULL	COMMENT '结束时间',
   `status` tinyint DEFAULT 0					NOT NULL	COMMENT '标志位',
-  `details` text								NOT NULL	COMMENT '详情',
+  `details` text											COMMENT '详情',
   `uploader_id` int 							NOT NULL	COMMENT '上传者ID',
   FOREIGN KEY (`uploader_id`) REFERENCES scMoAnnoUser(`user_id`)
+);
+
+drop table if exists `scMoAnnoFiles`;
+create table `scMoAnnoFiles`(
+  `file_id` int AUTO_INCREMENT PRIMARY KEY  	NOT NULL	COMMENT '文件ID',
+  `scRNA_seq_file` varchar(100) UNIQUE			NOT NULL	COMMENT 'scRNA-seq文件名',
+  `scATAC_seq_file` varchar(100) UNIQUE			NOT NULL	COMMENT 'scATAC-seq文件名',
+  `Tag_file` varchar(100) UNIQUE				NOT NULL	COMMENT 'Tag文件名',
+  `task_name` varchar(20)                       NOT NULL    COMMENT '任务名',
+  FOREIGN KEY (`task_name`) REFERENCES scMoAnnoTask(`task_name`)
 );
 
 drop table if exists `feedback`;
