@@ -26,7 +26,17 @@ public class UserController {
     @RequestMapping("/findUsers")
     @CrossOrigin(origins = "*")
     public Result<List<Scmoannouser>> findUsers() {
-        return Result.success(userServer.findUsers());
+        List<Scmoannouser> users = userServer.findUsers();
+
+        // 遍历所有用户并转换头像
+        for (Scmoannouser user : users) {
+            if (user.getAvatar() != null) {
+                String base64Avatar = Base64.getEncoder().encodeToString(user.getAvatar());
+                user.setAvatarBase64(base64Avatar); // 添加 Base64 编码字段
+                user.setAvatar(null); // 清除 BLOB 字段
+            }
+        }
+        return Result.success(users);
     }
 
     @RequestMapping("/login")
