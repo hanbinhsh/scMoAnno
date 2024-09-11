@@ -1,5 +1,10 @@
 use scMoAnnoDB;
 
+drop table if exists `feedback`;
+drop table if exists `scMoAnnoTask`;
+drop table if exists `scMoAnnoFiles`;
+drop table if exists `scMoAnnoUser`;
+
 drop table if exists `scMoAnnoUser`;
 create table `scMoAnnoUser`(
   `user_id` int AUTO_INCREMENT PRIMARY KEY  	NOT NULL	COMMENT '用户ID',
@@ -16,7 +21,7 @@ create table `scMoAnnoTask`(
   `task_id` int AUTO_INCREMENT PRIMARY KEY  	NOT NULL	COMMENT '任务ID',
   `task_name` varchar(20) UNIQUE				NOT NULL	COMMENT '任务名',
   `start_time` datetime				 			NOT NULL	COMMENT '开始时间',
-  `end_time` datetime					 		NOT NULL	COMMENT '结束时间',
+  `end_time` datetime					 					COMMENT '结束时间',
   `status` tinyint DEFAULT 0					NOT NULL	COMMENT '标志位',
   `details` text											COMMENT '详情',
   `uploader_id` int 							NOT NULL	COMMENT '上传者ID',
