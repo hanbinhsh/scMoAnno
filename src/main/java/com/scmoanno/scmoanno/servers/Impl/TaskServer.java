@@ -1,5 +1,6 @@
 package com.scmoanno.scmoanno.servers.Impl;
 
+import com.scmoanno.scmoanno.entity.Scmoannofiles;
 import com.scmoanno.scmoanno.entity.Scmoannotask;
 import com.scmoanno.scmoanno.mapper.TaskMapper;
 import jakarta.annotation.Resource;
@@ -19,6 +20,12 @@ public class TaskServer implements com.scmoanno.scmoanno.servers.TaskServer {
     @Transactional
     public List<Scmoannotask> findTasksByUserId(Long id) {
         return taskMapper.findTasksByUserId(id);
+    }
+
+    @Override
+    @Transactional
+    public Scmoannofiles findTaskByTaskName(String taskName) {
+        return taskMapper.findTaskByTaskName(taskName);
     }
 
     @Override

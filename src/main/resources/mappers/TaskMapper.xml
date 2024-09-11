@@ -31,4 +31,7 @@
             FROM scMoAnnoUser u
             JOIN scMoAnnoTask t ON u.user_id = t.uploader_id;
     </select>
+    <select id="findTaskByTaskName" resultType="com.scmoanno.scmoanno.entity.Scmoannofiles">
+        select * from scmoannotask where task_name = #{taskName}
+    </select>
 </mapper>

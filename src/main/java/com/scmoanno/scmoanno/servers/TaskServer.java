@@ -1,5 +1,6 @@
 package com.scmoanno.scmoanno.servers;
 
+import com.scmoanno.scmoanno.entity.Scmoannofiles;
 import com.scmoanno.scmoanno.entity.Scmoannotask;
 import org.apache.ibatis.annotations.Param;
 
@@ -13,4 +14,5 @@ public interface TaskServer {
     List<Scmoannotask> findAllTasks();
     Map<Object,Object> findAllTasksWithUserInformation();
     void updateTaskStatus(Long id, Long status);
+    Scmoannofiles findTaskByTaskName(String taskName);
 }
