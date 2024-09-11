@@ -67,7 +67,7 @@ public class UserController {
                                              @RequestParam("email") String email,
                                              @RequestParam("phone") String phone,
                                              @RequestParam("isAdmin") Long isAdmin,
-                                             @RequestParam("psw") String psw,
+                                             @RequestParam(value = "psw", required = false) String psw,
                                              @RequestParam(value = "avatar", required = false) MultipartFile avatar) {
 
         try {
