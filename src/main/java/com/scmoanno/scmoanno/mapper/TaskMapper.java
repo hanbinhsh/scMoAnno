@@ -1,5 +1,6 @@
 package com.scmoanno.scmoanno.mapper;
 
+import com.scmoanno.scmoanno.entity.Scmoannofiles;
 import com.scmoanno.scmoanno.entity.Scmoannotask;
 import org.apache.ibatis.annotations.MapKey;
 import org.apache.ibatis.annotations.Mapper;
@@ -14,7 +15,7 @@ public interface TaskMapper {
     List<Scmoannotask> findTasksByUserId(@Param("id") Long id);
     List<Scmoannotask> findAllTasks();
     void deleteTasksByTaskId(@Param("id") Long id);
-
+    Scmoannofiles findTaskByTaskName(@Param("taskName") String taskName);
     void insertTask(Scmoannotask task);
     @MapKey("task_id")
     Map<Object,Object> findAllTasksWithUserInformation();

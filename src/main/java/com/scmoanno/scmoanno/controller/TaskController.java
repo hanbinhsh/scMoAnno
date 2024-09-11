@@ -36,6 +36,18 @@ public class TaskController {
         return Result.success(taskServer.findTasksByUserId(userID));
     }
 
+
+
+    @RequestMapping("/findTaskByTaskName")
+    @CrossOrigin(origins = "*")
+    public Result findTasksByUserID(@RequestParam String taskName) {
+        if(taskServer.findTaskByTaskName(taskName) == null) {
+            return Result.success();
+        }
+        else
+            return Result.error("the taskName already exists");
+    }
+
     @RequestMapping("/deleteTaskByID")
     @CrossOrigin(origins = "*")
     public Result deleteTaskByID(@RequestParam long taskID) {

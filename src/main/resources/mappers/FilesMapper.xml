@@ -4,8 +4,8 @@
 
 <mapper namespace="com.scmoanno.scmoanno.mapper.FilesMapper">
     <insert id="insertFiles">
-        INSERT INTO scMoAnnoFiles (scRNA_seq_file, scATAC_seq_file, Tag_file, task_name)
-        VALUES('1', '2', '3', #{taskName} )
+        INSERT INTO scMoAnnoFiles (task_name)
+        VALUES(#{taskName} )
 
     </insert>
     <update id="updateFiles1">

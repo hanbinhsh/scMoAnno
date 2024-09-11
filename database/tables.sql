@@ -31,9 +31,9 @@ create table `scMoAnnoTask`(
 drop table if exists `scMoAnnoFiles`;
 create table `scMoAnnoFiles`(
   `file_id` int AUTO_INCREMENT PRIMARY KEY  	NOT NULL	COMMENT '文件ID',
-  `scRNA_seq_file` varchar(100) UNIQUE			NOT NULL	COMMENT 'scRNA-seq文件名',
-  `scATAC_seq_file` varchar(100) UNIQUE			NOT NULL	COMMENT 'scATAC-seq文件名',
-  `Tag_file` varchar(100) UNIQUE				NOT NULL	COMMENT 'Tag文件名',
+  `scRNA_seq_file` varchar(100) UNIQUE						COMMENT 'scRNA-seq文件名',
+  `scATAC_seq_file` varchar(100) UNIQUE						COMMENT 'scATAC-seq文件名',
+  `Tag_file` varchar(100) UNIQUE							COMMENT 'Tag文件名',
   `task_name` varchar(20)                       NOT NULL    COMMENT '任务名',
   FOREIGN KEY (`task_name`) REFERENCES scMoAnnoTask(`task_name`)
 );

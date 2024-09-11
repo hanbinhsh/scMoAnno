@@ -47,15 +47,15 @@ public class FileController {
         Scmoannofiles files = new Scmoannofiles();
 
         if(FileUtils.isH5File(fileName)){
-            files.setScRna_SeqFile(fileName);
+            files.setScRna_SeqFile(randomFileName);
             filesServer.updateFiles1(files, taskName);
         }
         else if(FileUtils.isH5adFile(fileName)){
-            files.setScAtac_SeqFile(fileName);
+            files.setScAtac_SeqFile(randomFileName);
             filesServer.updateFiles2(files, taskName);
         }
         else if(FileUtils.isCsvFile(fileName)){
-            files.setTagFile(fileName);
+            files.setTagFile(randomFileName);
             filesServer.updateFiles3(files, taskName);
         }
         // 文件操作
