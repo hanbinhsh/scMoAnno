@@ -6,7 +6,6 @@ import com.scmoanno.scmoanno.entity.Scmoannofiles;
 import com.scmoanno.scmoanno.entity.Scmoannotask;
 import com.scmoanno.scmoanno.servers.FilesServer;
 import com.scmoanno.scmoanno.servers.TaskServer;
-import com.scmoanno.scmoanno.utils.FileUtils;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,6 +16,7 @@ import java.sql.Timestamp;
 import java.time.ZonedDateTime;
 
 import java.util.Map;
+import java.util.Objects;
 import java.util.UUID;
 
 @RestController
@@ -28,7 +28,8 @@ public class FileController {
     @PostMapping("/uploadOneFile")
     @CrossOrigin(origins = "*")  // 跨域
     public Result uploadOneFile(@RequestParam("file") MultipartFile file,
-                                             @RequestParam("taskName") String taskName) throws IOException {
+                                @RequestParam("taskName") String taskName,
+                                @RequestParam("fileType") String fileType) throws IOException {
         String fileName = file.getOriginalFilename();  // 文件名
         String contentType = file.getContentType();  // 内容类型
         String name = file.getName();  // 表单域名
@@ -46,15 +47,15 @@ public class FileController {
 
         Scmoannofiles files = new Scmoannofiles();
 
-        if(FileUtils.isH5File(fileName)){
+        if(Objects.equals(fileType, "scRNASeqFile")){
             files.setScRna_SeqFile(randomFileName);
             filesServer.updateFiles1(files, taskName);
         }
-        else if(FileUtils.isH5adFile(fileName)){
+        else if(Objects.equals(fileType, "scATACSeqFile")){
             files.setScAtac_SeqFile(randomFileName);
             filesServer.updateFiles2(files, taskName);
         }
-        else if(FileUtils.isCsvFile(fileName)){
+        else if(Objects.equals(fileType, "tagFile")){
             files.setTagFile(randomFileName);
             filesServer.updateFiles3(files, taskName);
         }
