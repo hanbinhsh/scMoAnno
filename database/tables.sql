@@ -1,8 +1,8 @@
 use scMoAnnoDB;
 
 drop table if exists `feedback`;
-drop table if exists `scMoAnnoTask`;
 drop table if exists `scMoAnnoFiles`;
+drop table if exists `scMoAnnoTask`;
 drop table if exists `scMoAnnoUser`;
 
 drop table if exists `scMoAnnoUser`;
