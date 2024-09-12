@@ -10,4 +10,6 @@ public interface FilesMapper {
     public void updateFiles1(Scmoannofiles files, String taskName);
     public void updateFiles2(Scmoannofiles files, String taskName);
     public void updateFiles3(Scmoannofiles files, String taskName);
+
+    Scmoannofiles findFileByTaskName(String taskName);
 }

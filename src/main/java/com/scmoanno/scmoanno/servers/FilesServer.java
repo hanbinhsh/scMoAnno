@@ -7,4 +7,6 @@ public interface FilesServer {
     void updateFiles1(Scmoannofiles files, String taskName);
     void updateFiles2(Scmoannofiles files, String taskName);
     void updateFiles3(Scmoannofiles files, String taskName);
+
+    Scmoannofiles findFileByTaskName(String taskName);
 }

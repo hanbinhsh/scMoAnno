@@ -17,5 +17,8 @@
     <update id="updateFiles3">
         update scMoAnnoFiles set Tag_file = #{files.tagFile} where task_name = #{taskName}
     </update>
+    <select id="findFileByTaskName" resultType="com.scmoanno.scmoanno.entity.Scmoannofiles">
+        select * from scmoannofiles where task_name = #{taskName}
+    </select>
 
 </mapper>

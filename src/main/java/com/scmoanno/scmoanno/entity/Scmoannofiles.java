@@ -4,8 +4,8 @@ package com.scmoanno.scmoanno.entity;
 public class Scmoannofiles {
 
   private long fileId;
-  private String scRna_SeqFile;
-  private String scAtac_SeqFile;
+  private String scRnaSeqFile;
+  private String scAtacSeqFile;
   private String tagFile;
   private String taskName;
 
@@ -20,20 +20,20 @@ public class Scmoannofiles {
 
 
   public String getScRna_SeqFile() {
-    return scRna_SeqFile;
+    return scRnaSeqFile;
   }
 
   public void setScRna_SeqFile(String scRna_SeqFile) {
-    this.scRna_SeqFile = scRna_SeqFile;
+    this.scRnaSeqFile = scRna_SeqFile;
   }
 
 
   public String getScAtac_SeqFile() {
-    return scAtac_SeqFile;
+    return scAtacSeqFile;
   }
 
   public void setScAtac_SeqFile(String scAtac_SeqFile) {
-    this.scAtac_SeqFile = scAtac_SeqFile;
+    this.scAtacSeqFile = scAtac_SeqFile;
   }
 
 

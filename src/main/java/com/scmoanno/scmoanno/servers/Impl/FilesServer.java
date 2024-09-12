@@ -35,4 +35,10 @@ public class FilesServer implements com.scmoanno.scmoanno.servers.FilesServer {
     public void updateFiles3(Scmoannofiles files, String taskName) {
         filesMapper.updateFiles3(files, taskName);
     }
+
+    @Override
+    @Transactional
+    public Scmoannofiles findFileByTaskName(String taskName) {
+        return filesMapper.findFileByTaskName(taskName);
+    }
 }

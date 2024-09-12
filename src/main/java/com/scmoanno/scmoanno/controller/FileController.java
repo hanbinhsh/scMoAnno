@@ -1,23 +1,32 @@
 package com.scmoanno.scmoanno.controller;
 
 
+import org.apache.commons.compress.archivers.zip.ZipArchiveEntry;
+import org.apache.commons.compress.archivers.zip.ZipArchiveInputStream;
+import org.apache.commons.compress.archivers.zip.ZipArchiveOutputStream;
 import com.scmoanno.scmoanno.entity.Result;
 import com.scmoanno.scmoanno.entity.Scmoannofiles;
 import com.scmoanno.scmoanno.entity.Scmoannotask;
 import com.scmoanno.scmoanno.servers.FilesServer;
 import com.scmoanno.scmoanno.servers.TaskServer;
 import jakarta.annotation.Resource;
+import org.apache.tomcat.util.http.fileupload.ByteArrayOutputStream;
+import org.apache.tomcat.util.http.fileupload.IOUtils;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
+import java.net.URLEncoder;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.Timestamp;
 import java.time.ZonedDateTime;
 
-import java.util.Map;
-import java.util.Objects;
-import java.util.UUID;
+import java.util.*;
 
 @RestController
 public class FileController {
@@ -72,5 +81,45 @@ public class FileController {
         files.setTaskName(map.get("taskName"));
         filesServer.insertFiles(files);
         return Result.success();
+    }
+
+    @GetMapping("/download")
+    @CrossOrigin(origins = "*")
+    public ResponseEntity<byte[]> download(@RequestParam String taskName) throws IOException {
+        Scmoannofiles file = filesServer.findFileByTaskName(taskName);
+        String[] filePaths = new String[3];
+        filePaths[0] = "c:\\ScmoannoFiles\\"+file.getScRna_SeqFile();
+        filePaths[1] = "c:\\ScmoannoFiles\\"+file.getScAtac_SeqFile();
+        filePaths[2] = "c:\\ScmoannoFiles\\"+file.getTagFile();
+
+        try (ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
+            ZipArchiveOutputStream zaos = new ZipArchiveOutputStream(baos);
+
+            // 添加文件
+            for (String filePath : filePaths) {
+                try (InputStream is = Files.newInputStream(Paths.get(filePath))) {
+                    ZipArchiveEntry ze = new ZipArchiveEntry(filePath);
+                    ze.setSize(Files.size(Paths.get(filePath)));
+                    zaos.putArchiveEntry(ze);
+                    IOUtils.copy(is, zaos);
+                    zaos.closeArchiveEntry();
+                }
+            }
+
+            zaos.close();
+
+            // 创建一个文件资源对象，并设置相应的属性
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+            headers.setContentDispositionFormData("attachment", "multiple_files.zip");
+
+            // 返回文件内容
+            return ResponseEntity.ok()
+                    .headers(headers)
+                    .body(baos.toByteArray());
+        } catch (IOException e) {
+            // 处理异常
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
     }
 }
