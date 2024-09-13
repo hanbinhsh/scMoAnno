@@ -4,8 +4,8 @@
 
 <mapper namespace="com.scmoanno.scmoanno.mapper.TaskMapper">
     <insert id="insertTask">
-        insert into scMoAnnoTask(task_name, start_time, end_time, uploader_id)
-        values(#{taskName},#{startTime},#{endTime},#{uploaderId})
+        insert into scMoAnnoTask(task_name, start_time, uploader_id)
+        values(#{taskName},#{startTime},#{uploaderId})
     </insert>
     <update id="updateTaskStatus">
         update scmoannotask
