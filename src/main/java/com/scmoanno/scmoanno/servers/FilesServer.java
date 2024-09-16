@@ -1,6 +1,7 @@
 package com.scmoanno.scmoanno.servers;
 
 import com.scmoanno.scmoanno.entity.Scmoannofiles;
+import com.scmoanno.scmoanno.entity.Scmoannoresult;
 
 public interface FilesServer {
     void insertFiles(Scmoannofiles files);
@@ -9,4 +10,9 @@ public interface FilesServer {
     void updateFiles3(Scmoannofiles files, String taskName);
 
     Scmoannofiles findFileByTaskName(String taskName);
+
+    void insertResult(Scmoannoresult result);
+    void updateResult1(Scmoannoresult result, String taskName);
+    void updateResult2(Scmoannoresult result, String taskName);
+    void updateResult3(Scmoannoresult result, String taskName);
 }
