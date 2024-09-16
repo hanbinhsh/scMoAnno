@@ -1,13 +1,10 @@
 package com.scmoanno.scmoanno.controller;
 
 
-import com.scmoanno.scmoanno.entity.Scmoannoresult;
+import com.scmoanno.scmoanno.entity.*;
 import org.apache.commons.compress.archivers.zip.ZipArchiveEntry;
 import org.apache.commons.compress.archivers.zip.ZipArchiveInputStream;
 import org.apache.commons.compress.archivers.zip.ZipArchiveOutputStream;
-import com.scmoanno.scmoanno.entity.Result;
-import com.scmoanno.scmoanno.entity.Scmoannofiles;
-import com.scmoanno.scmoanno.entity.Scmoannotask;
 import com.scmoanno.scmoanno.servers.FilesServer;
 import com.scmoanno.scmoanno.servers.TaskServer;
 import jakarta.annotation.Resource;
@@ -35,6 +32,15 @@ public class FileController {
     @Resource
     private FilesServer filesServer;
 
+    @RequestMapping("/findResultByTaskName")
+    @CrossOrigin(origins = "*")
+    public Result findResultByTaskName(@RequestParam String taskName) {
+        if(filesServer.findResultByTaskName(taskName)==null){
+            return Result.success();
+        }
+        return Result.error("the taskName already exists");
+    }
+
     @PostMapping("/uploadResult")
     @CrossOrigin(origins = "*")  // 跨域
     public Result uploadResult(@RequestParam("file") MultipartFile file,
@@ -57,11 +63,7 @@ public class FileController {
 
         Scmoannoresult result = new Scmoannoresult();
 
-        if(Objects.equals(fileType, "configjsFile")){
-            result.setConfigFile(randomFileName);
-            filesServer.updateResult1(result, taskName);
-        }
-        else if(Objects.equals(fileType, "datajsFile")){
+        if(Objects.equals(fileType, "datajsFile")){
             result.setDataFile(randomFileName);
             filesServer.updateResult2(result, taskName);
         }

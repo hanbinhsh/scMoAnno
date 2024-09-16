@@ -66,4 +66,10 @@ public class FilesServer implements com.scmoanno.scmoanno.servers.FilesServer {
     public Scmoannofiles findFileByTaskName(String taskName) {
         return filesMapper.findFileByTaskName(taskName);
     }
+
+    @Override
+    @Transactional
+    public Scmoannoresult findResultByTaskName(String taskName) {
+        return filesMapper.findResultByTaskName(taskName);
+    }
 }

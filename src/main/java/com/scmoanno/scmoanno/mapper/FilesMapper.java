@@ -18,4 +18,5 @@ public interface FilesMapper {
     public void updateResult1(Scmoannoresult result, String taskName);
     public void updateResult2(Scmoannoresult result, String taskName);
     public void updateResult3(Scmoannoresult result, String taskName);
+    Scmoannoresult findResultByTaskName(@Param("taskName") String taskName);
 }

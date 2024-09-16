@@ -33,5 +33,8 @@
     <select id="findFileByTaskName" resultType="com.scmoanno.scmoanno.entity.Scmoannofiles">
         select * from scmoannofiles where task_name = #{taskName}
     </select>
+    <select id="findResultByTaskName" resultType="com.scmoanno.scmoanno.entity.Scmoannoresult">
+        select * from scMoAnnoResult where task_name = #{taskName}
+    </select>
 
 </mapper>
