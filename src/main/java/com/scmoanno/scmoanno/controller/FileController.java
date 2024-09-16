@@ -62,8 +62,11 @@ public class FileController {
         // 数据库包装
 
         Scmoannoresult result = new Scmoannoresult();
-
-        if(Objects.equals(fileType, "datajsFile")){
+        if(Objects.equals(fileType, "configjsFile")){
+            result.setConfigFile(randomFileName);
+            filesServer.updateResult1(result, taskName);
+        }
+        else if(Objects.equals(fileType, "datajsFile")){
             result.setDataFile(randomFileName);
             filesServer.updateResult2(result, taskName);
         }
