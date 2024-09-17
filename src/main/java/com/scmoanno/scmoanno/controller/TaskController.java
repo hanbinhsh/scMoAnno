@@ -36,8 +36,6 @@ public class TaskController {
         return Result.success(taskServer.findTasksByUserId(userID));
     }
 
-
-
     @RequestMapping("/findTaskByTaskName")
     @CrossOrigin(origins = "*")
     public Result findTasksByUserID(@RequestParam String taskName) {
@@ -55,12 +53,6 @@ public class TaskController {
         return Result.success();
     }
 
-    @RequestMapping("/findAllTasks")
-    @CrossOrigin(origins = "*")
-    public Result<List<Scmoannotask>> findAllTasks(){
-        return Result.success(taskServer.findAllTasks());
-    }
-
     @RequestMapping("/findAllTasksWithUserInformation")
     @CrossOrigin(origins = "*")
     public Result<Map<Object,Object>> findAllTasksWithUserInformation(){
@@ -69,10 +61,9 @@ public class TaskController {
         // 遍历所有任务并转换用户头像
         for (Object task : tasksWithUserInfo.keySet()) {
             Object userInfo = tasksWithUserInfo.get(task);
-            if (userInfo != null && userInfo instanceof Map) {
+            if (userInfo instanceof Map) {
                 Map<String, Object> userMap = (Map<String, Object>) userInfo;
-                if (userMap.get("avatar") instanceof byte[]) {
-                    byte[] avatarBytes = (byte[]) userMap.get("avatar");
+                if (userMap.get("avatar") instanceof byte[] avatarBytes) {
                     String base64Avatar = Base64.getEncoder().encodeToString(avatarBytes);
                     userMap.put("avatarBase64", base64Avatar); // 添加 Base64 编码字段
                 }

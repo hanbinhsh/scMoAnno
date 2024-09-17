@@ -11,7 +11,6 @@ public interface TaskServer {
     void insertTask(Scmoannotask task);
     List<Scmoannotask> findTasksByUserId(Long id);
     void deleteTasksByTaskId(Long id);
-    List<Scmoannotask> findAllTasks();
     Map<Object,Object> findAllTasksWithUserInformation();
     void updateTaskStatus(Long id, Long status);
     Scmoannofiles findTaskByTaskName(String taskName);

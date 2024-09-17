@@ -22,11 +22,6 @@ public class FeedbackController {
         return Result.success();
     }
 
-    @GetMapping("/findFeedback")
-    public Result<List<Feedback>> getFeedback() {
-        return Result.success(feedbackServer.getFeedback());
-    }
-
     @RequestMapping("/findAllFeedbackWithUserInformation")
     @CrossOrigin(origins = "*")
     public Result<Map<Object,Object>> findAllFeedbackWithUserInformation(){
@@ -35,10 +30,9 @@ public class FeedbackController {
         // 遍历所有反馈信息和用户信息，并转换用户头像
         for (Object feedback : feedbackWithUserInfo.keySet()) {
             Object userInfo = feedbackWithUserInfo.get(feedback);
-            if (userInfo != null && userInfo instanceof Map) {
+            if (userInfo instanceof Map) {
                 Map<String, Object> userMap = (Map<String, Object>) userInfo;
-                if (userMap.get("avatar") instanceof byte[]) {
-                    byte[] avatarBytes = (byte[]) userMap.get("avatar");
+                if (userMap.get("avatar") instanceof byte[] avatarBytes) {
                     String base64Avatar = Base64.getEncoder().encodeToString(avatarBytes);
                     userMap.put("avatarBase64", base64Avatar); // 添加 Base64 编码字段
                 }
@@ -46,7 +40,6 @@ public class FeedbackController {
         }
 
         return Result.success(feedbackWithUserInfo);
-       // return Result.success(feedbackServer.findAllFeedbackWithUserInformation());
     }
 
     @DeleteMapping("/deleteFeedback/{feedbackId}")

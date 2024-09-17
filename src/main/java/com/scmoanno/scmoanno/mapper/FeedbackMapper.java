@@ -9,11 +9,7 @@ import java.util.Map;
 
 @Mapper
 public interface FeedbackMapper {
-
     void insert(Feedback feedback);
-
-    List<Feedback> getFeedback();
-
     void deleteFeedback(long feedbackId);
     @MapKey("feedback_id")
     Map<Object, Object> findAllFeedbackWithUserInformation();

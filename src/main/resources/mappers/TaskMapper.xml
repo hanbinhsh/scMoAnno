@@ -23,9 +23,6 @@
     <select id="findTasksByUserId" resultType="com.scmoanno.scmoanno.entity.Scmoannotask">
         select * from scmoannotask where uploader_id = #{id}
     </select>
-    <select id="findAllTasks" resultType="com.scmoanno.scmoanno.entity.Scmoannotask">
-        select * from scmoannotask
-    </select>
     <select id="findAllTasksWithUserInformation" resultType="java.util.Map">
         SELECT u.*, t.*
             FROM scMoAnnoUser u
