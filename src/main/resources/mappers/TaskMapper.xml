@@ -9,7 +9,7 @@
     </insert>
     <update id="updateTaskStatus">
         update scmoannotask
-        set status = #{status}
+        set status = #{status}, details = #{details}
         where task_id = #{id}
     </update>
     <update id="updateTaskEndTime">

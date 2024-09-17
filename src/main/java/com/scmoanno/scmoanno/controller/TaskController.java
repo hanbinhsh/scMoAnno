@@ -76,8 +76,8 @@ public class TaskController {
 
     @RequestMapping("/updateTaskStatus")
     @CrossOrigin(origins = "*")
-    public Result updateTaskStatus(@RequestParam("taskID") Long taskID, @RequestParam("status") Long status) {
-        taskServer.updateTaskStatus(taskID, status);
+    public Result updateTaskStatus(@RequestParam("taskID") Long taskID, @RequestParam("status") Long status, @RequestParam("details") String details) {
+        taskServer.updateTaskStatus(taskID, status, details);
         return Result.success();
     }
 }

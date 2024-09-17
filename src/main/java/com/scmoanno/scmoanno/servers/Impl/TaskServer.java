@@ -42,8 +42,8 @@ public class TaskServer implements com.scmoanno.scmoanno.servers.TaskServer {
     }
 
     @Override
-    public void updateTaskStatus(Long id, Long status) {
-        taskMapper.updateTaskStatus(id, status);
+    public void updateTaskStatus(Long id, Long status,String details) {
+        taskMapper.updateTaskStatus(id, status, details);
         if (status == 0 || status == 1) {
             // 对于未完成的任务，将结束时间设置为 null
             taskMapper.updateTaskEndTime(id, null);
