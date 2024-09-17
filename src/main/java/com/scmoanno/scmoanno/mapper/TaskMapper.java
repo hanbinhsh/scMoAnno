@@ -13,7 +13,6 @@ import java.util.Map;
 @Mapper
 public interface TaskMapper {
     List<Scmoannotask> findTasksByUserId(@Param("id") Long id);
-    List<Scmoannotask> findAllTasks();
     void deleteTasksByTaskId(@Param("id") Long id);
     Scmoannofiles findTaskByTaskName(@Param("taskName") String taskName);
     void insertTask(Scmoannotask task);
@@ -21,5 +20,4 @@ public interface TaskMapper {
     Map<Object,Object> findAllTasksWithUserInformation();
     void updateTaskStatus(@Param("id") Long id, @Param("status") Long status);
     void updateTaskEndTime(@Param("id") Long id, @Param("time") Date time);
-
 }

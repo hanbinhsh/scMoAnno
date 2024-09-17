@@ -23,11 +23,6 @@ public class FeedbackServer implements com.scmoanno.scmoanno.servers.FeedbackSer
     }
 
     @Override
-    public List<Feedback> getFeedback() {
-        return feedbackMapper.getFeedback();
-    }
-
-    @Override
     public void deleteFeedback(long feedbackId) {
         feedbackMapper.deleteFeedback(feedbackId);
     }

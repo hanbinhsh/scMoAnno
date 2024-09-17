@@ -37,11 +37,6 @@ public class TaskServer implements com.scmoanno.scmoanno.servers.TaskServer {
     public void insertTask(Scmoannotask task){taskMapper.insertTask(task); }
 
     @Override
-    public List<Scmoannotask> findAllTasks() {
-        return taskMapper.findAllTasks();
-    }
-
-    @Override
     public Map<Object,Object> findAllTasksWithUserInformation() {
         return taskMapper.findAllTasksWithUserInformation();
     }

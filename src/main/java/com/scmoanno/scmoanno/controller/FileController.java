@@ -1,11 +1,9 @@
 package com.scmoanno.scmoanno.controller;
 
 
-import com.scmoanno.scmoanno.entity.Scmoannoresult;
+import com.scmoanno.scmoanno.entity.*;
 import org.apache.commons.compress.archivers.zip.ZipArchiveEntry;
 import org.apache.commons.compress.archivers.zip.ZipArchiveOutputStream;
-import com.scmoanno.scmoanno.entity.Result;
-import com.scmoanno.scmoanno.entity.Scmoannofiles;
 import com.scmoanno.scmoanno.servers.FilesServer;
 import jakarta.annotation.Resource;
 import org.apache.commons.io.FileUtils;
@@ -32,6 +30,54 @@ public class FileController {
 
     @Resource
     private FilesServer filesServer;
+
+    @RequestMapping("/findResultByTaskName")
+    @CrossOrigin(origins = "*")
+    public Result findResultByTaskName(@RequestParam String taskName) {
+        if(filesServer.findResultByTaskName(taskName)==null){
+            return Result.success();
+        }
+        return Result.error("the taskName already exists");
+    }
+
+    @PostMapping("/uploadResult")
+    @CrossOrigin(origins = "*")  // 跨域
+    public Result uploadResult(@RequestParam("file") MultipartFile file,
+                                @RequestParam("taskName") String taskName,
+                                @RequestParam("fileType") String fileType) throws IOException {
+        String fileName = file.getOriginalFilename();  // 文件名
+        String contentType = file.getContentType();  // 内容类型
+        String name = file.getName();  // 表单域名
+        System.out.println(name+" "+fileName+" "+contentType);
+        Timestamp timestamp = Timestamp.from(ZonedDateTime.now().toInstant());
+        // 支持重复上传，uuid重新命名
+        String randomFileName = UUID.randomUUID().toString();
+        // 路径获取
+        int suffixIndex = fileName.lastIndexOf(".");
+        if(suffixIndex > 0){  // 有后缀名
+            randomFileName = randomFileName + fileName.substring(suffixIndex);
+        }
+        String realFilePath = "c:/ScmoannoResult/"+randomFileName;
+        // 数据库包装
+
+        Scmoannoresult result = new Scmoannoresult();
+        if(Objects.equals(fileType, "configjsFile")){
+            result.setConfigFile(randomFileName);
+            filesServer.updateResult1(result, taskName);
+        }
+        else if(Objects.equals(fileType, "datajsFile")){
+            result.setDataFile(randomFileName);
+            filesServer.updateResult2(result, taskName);
+        }
+        else if(Objects.equals(fileType, "lablejsFile")){
+            result.setLableFile(randomFileName);
+            filesServer.updateResult3(result, taskName);
+        }
+        // 文件操作
+        file.transferTo(new File(realFilePath));  // 移动到目标文件
+        return Result.success();
+
+    }
 
 //    @GetMapping("/downloadResult")
 //    public ResponseEntity<byte[]> downloadResult(@RequestParam String taskName) throws IOException {
@@ -144,6 +190,15 @@ public class FileController {
         Scmoannofiles files = new Scmoannofiles();
         files.setTaskName(map.get("taskName"));
         filesServer.insertFiles(files);
+        return Result.success();
+    }
+
+    @RequestMapping("/insertResult")
+    @CrossOrigin(origins = "*")
+    public Result insertResult(@RequestBody Map<String,String> map) {
+        Scmoannoresult result = new Scmoannoresult();
+        result.setTaskName(map.get("taskName"));
+        filesServer.insertResult(result);
         return Result.success();
     }
 

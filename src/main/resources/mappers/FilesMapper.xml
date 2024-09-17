@@ -8,6 +8,10 @@
         VALUES(#{taskName} )
 
     </insert>
+    <insert id="insertResult">
+        insert into scMoAnnoResult(task_name)
+        values(#{taskName})
+    </insert>
     <update id="updateFiles1">
         update scMoAnnoFiles set scRNA_seq_file = #{files.scRna_SeqFile} where task_name = #{taskName}
     </update>
@@ -17,11 +21,20 @@
     <update id="updateFiles3">
         update scMoAnnoFiles set Tag_file = #{files.tagFile} where task_name = #{taskName}
     </update>
+    <update id="updateResult1">
+        update scMoAnnoResult set config_file = #{result.configFile} where task_name = #{taskName}
+    </update>
+    <update id="updateResult2">
+        update scMoAnnoResult set data_file = #{result.dataFile} where task_name = #{taskName}
+    </update>
+    <update id="updateResult3">
+        update scMoAnnoResult set lable_file = #{result.lableFile} where task_name = #{taskName}
+    </update>
     <select id="findFileByTaskName" resultType="com.scmoanno.scmoanno.entity.Scmoannofiles">
         select * from scmoannofiles where task_name = #{taskName}
     </select>
     <select id="findResultByTaskName" resultType="com.scmoanno.scmoanno.entity.Scmoannoresult">
-        select * from scmoannoresult where task_name = #{taskName}
+        select * from scMoAnnoResult where task_name = #{taskName}
     </select>
 
 </mapper>

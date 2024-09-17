@@ -15,6 +15,12 @@ public class FilesServer implements com.scmoanno.scmoanno.servers.FilesServer {
 
     @Override
     @Transactional
+    public void insertResult(Scmoannoresult result) {
+        filesMapper.insertResult(result);
+    }
+
+    @Override
+    @Transactional
     public void insertFiles(Scmoannofiles files) {
         filesMapper.insertFiles(files);
     }
@@ -39,11 +45,31 @@ public class FilesServer implements com.scmoanno.scmoanno.servers.FilesServer {
 
     @Override
     @Transactional
+    public void updateResult1(Scmoannoresult result, String taskName) {
+        filesMapper.updateResult1(result, taskName);
+    }
+
+    @Override
+    @Transactional
+    public void updateResult2(Scmoannoresult result, String taskName) {
+        filesMapper.updateResult2(result, taskName);
+    }
+
+    @Override
+    @Transactional
+    public void updateResult3(Scmoannoresult result, String taskName) {
+        filesMapper.updateResult3(result, taskName);
+    }
+
+    @Override
+    @Transactional
     public Scmoannofiles findFileByTaskName(String taskName) {
         return filesMapper.findFileByTaskName(taskName);
     }
 
     @Override
     @Transactional
-    public Scmoannoresult findResultByTaskName(String taskName) {return filesMapper.findResultByTaskName(taskName);}
+    public Scmoannoresult findResultByTaskName(String taskName) {
+        return filesMapper.findResultByTaskName(taskName);
+    }
 }
