@@ -1,6 +1,7 @@
 package com.scmoanno.scmoanno.servers.Impl;
 
 import com.scmoanno.scmoanno.entity.Scmoannofiles;
+import com.scmoanno.scmoanno.entity.Scmoannoresult;
 import com.scmoanno.scmoanno.mapper.FilesMapper;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
@@ -41,4 +42,8 @@ public class FilesServer implements com.scmoanno.scmoanno.servers.FilesServer {
     public Scmoannofiles findFileByTaskName(String taskName) {
         return filesMapper.findFileByTaskName(taskName);
     }
+
+    @Override
+    @Transactional
+    public Scmoannoresult findResultByTaskName(String taskName) {return filesMapper.findResultByTaskName(taskName);}
 }
