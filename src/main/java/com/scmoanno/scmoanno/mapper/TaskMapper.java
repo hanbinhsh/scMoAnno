@@ -20,5 +20,4 @@ public interface TaskMapper {
     Map<Object,Object> findAllTasksWithUserInformation();
     void updateTaskStatus(@Param("id") Long id, @Param("status") Long status);
     void updateTaskEndTime(@Param("id") Long id, @Param("time") Date time);
-
 }

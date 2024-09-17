@@ -96,19 +96,15 @@ public class UserController {
 
     @PostMapping("/register")
     public Result<String> register(@RequestBody Scmoannouser scmoannouser) {
-        if(userServer.findUserByUserName(scmoannouser.getUserName())!=null)
-        {
+        if(userServer.findUserByUserName(scmoannouser.getUserName())!=null) {
             return Result.error("The username already exists!");
         }
-        else if(userServer.findUserByEmail(scmoannouser.getEmail())!=null)
-        {
+        else if(userServer.findUserByEmail(scmoannouser.getEmail())!=null) {
             return Result.error("The email address is registered!");
         }
-        else if(userServer.findUserByPhone(scmoannouser.getPhone())!=null)
-        {
+        else if(userServer.findUserByPhone(scmoannouser.getPhone())!=null) {
             return Result.error("The phone number is registered!");
-        }
-        else{
+        }else{
             userServer.register(scmoannouser);
             return Result.success();
         }
@@ -118,14 +114,12 @@ public class UserController {
     public ResponseEntity<Scmoannouser> findUserByUserId(@RequestBody Map<String, String> map) {
         Long userId = Long.parseLong(map.get("userId"));
         Scmoannouser user = userServer.findUserByUserId(userId);
-
         // 将头像从 BLOB 转换为 Base64 编码
         if (user.getAvatar() != null) {
             String base64Avatar = Base64.getEncoder().encodeToString(user.getAvatar());
             user.setAvatarBase64(base64Avatar); // 添加 Base64 编码字段
             user.setAvatar(null);
         }
-
         return ResponseEntity.ok(user);
     }
 }
