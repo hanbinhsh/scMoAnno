@@ -3,11 +3,10 @@ package com.scmoanno.scmoanno.controller;
 
 import com.scmoanno.scmoanno.entity.*;
 import org.apache.commons.compress.archivers.zip.ZipArchiveEntry;
-import org.apache.commons.compress.archivers.zip.ZipArchiveInputStream;
 import org.apache.commons.compress.archivers.zip.ZipArchiveOutputStream;
 import com.scmoanno.scmoanno.servers.FilesServer;
-import com.scmoanno.scmoanno.servers.TaskServer;
 import jakarta.annotation.Resource;
+import org.apache.commons.io.FileUtils;
 import org.apache.tomcat.util.http.fileupload.ByteArrayOutputStream;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.http.HttpHeaders;
@@ -79,6 +78,71 @@ public class FileController {
         return Result.success();
 
     }
+
+//    @GetMapping("/downloadResult")
+//    public ResponseEntity<byte[]> downloadResult(@RequestParam String taskName) throws IOException {
+//        Scmoannoresult result = filesServer.findResultByTaskName(taskName);
+//        String[] filePaths = new String[3];
+//        filePaths[0] = "c:\\ScmoannoResult\\"+result.getConfigFile();
+//        filePaths[1] = "c:\\ScmoannoResult\\"+result.getDataFile();
+//        filePaths[2] = "c:\\ScmoannoResult\\"+result.getLableFile();
+//
+//        try (ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
+//            ZipArchiveOutputStream zaos = new ZipArchiveOutputStream(baos);
+//
+//            // 添加文件
+//            for (String filePath : filePaths) {
+//                try (InputStream is = Files.newInputStream(Paths.get(filePath))) {
+//                    ZipArchiveEntry ze = new ZipArchiveEntry(filePath);
+//                    ze.setSize(Files.size(Paths.get(filePath)));
+//                    zaos.putArchiveEntry(ze);
+//                    IOUtils.copy(is, zaos);
+//                    zaos.closeArchiveEntry();
+//                }
+//            }
+//            zaos.close();
+//            // 创建一个文件资源对象，并设置相应的属性
+//            HttpHeaders headers = new HttpHeaders();
+//            headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+//            headers.setContentDispositionFormData("attachment", "multiple_files.zip");
+//
+//            // 返回文件内容
+//            return ResponseEntity.ok()
+//                    .headers(headers)
+//                    .body(baos.toByteArray());
+//        } catch (IOException e) {
+//            // 处理异常
+//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+//        }
+//    }
+
+    @RequestMapping("/downloadResult")
+    @CrossOrigin(origins = "*")  // 跨域
+    public ResponseEntity<byte[]> downloadResult(@RequestParam String taskName, @RequestParam String type) throws IOException {
+        // 调用业务层接口的方法
+        Scmoannoresult result = filesServer.findResultByTaskName(taskName);
+        ResponseEntity.BodyBuilder builder = ResponseEntity.ok();  // 设置响应对象为二进制流
+        builder.contentType(MediaType.APPLICATION_OCTET_STREAM);
+        String fileName = URLEncoder.encode(result.getTaskName() ,"UTF-8");  // 设置下载的文件名
+        builder.header("Access-Control-Expose-Headers", "Content-Disposition");
+        builder.header("Content-Disposition", "attachment;filename*=UTF-8''" + fileName);
+        builder.header("Accept-Ranges", "bytes");
+
+        String filePaths = "paths";
+        if(type.equals("example")) {
+            filePaths = "c:\\ScmoannoResult\\"+result.getConfigFile();
+        }
+        else if(type.equals("data")) {
+            filePaths = "c:\\ScmoannoResult\\"+result.getLableFile();
+        }
+        else if(type.equals("label")) {
+            filePaths = "c:\\ScmoannoResult\\"+result.getLableFile();
+        }
+        File dFile = new File(filePaths);
+        return builder.body(FileUtils.readFileToByteArray(dFile));
+    }
+
+
 
     @PostMapping("/uploadOneFile")
     @CrossOrigin(origins = "*")  // 跨域
