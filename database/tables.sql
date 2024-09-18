@@ -74,3 +74,10 @@ BEGIN
 END //
 DELIMITER ;
 
+DELIMITER $$
+CREATE TRIGGER `before_task_delete` BEFORE DELETE ON `scMoAnnoTask` FOR EACH ROW
+BEGIN
+    -- 删除scMoAnnoResult表中所有与即将被删除的任务名对应的记录
+    DELETE FROM `scMoAnnoResult` WHERE `task_name` = OLD.task_name;
+    END$$
+DELIMITER ;
