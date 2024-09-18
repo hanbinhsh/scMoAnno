@@ -12,6 +12,6 @@ public interface TaskServer {
     List<Scmoannotask> findTasksByUserId(Long id);
     void deleteTasksByTaskId(Long id);
     Map<Object,Object> findAllTasksWithUserInformation();
-    void updateTaskStatus(Long id, Long status);
+    void updateTaskStatus(Long id, Long status,String details);
     Scmoannofiles findTaskByTaskName(String taskName);
 }

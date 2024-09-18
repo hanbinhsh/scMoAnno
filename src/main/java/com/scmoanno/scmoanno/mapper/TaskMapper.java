@@ -18,6 +18,6 @@ public interface TaskMapper {
     void insertTask(Scmoannotask task);
     @MapKey("task_id")
     Map<Object,Object> findAllTasksWithUserInformation();
-    void updateTaskStatus(@Param("id") Long id, @Param("status") Long status);
+    void updateTaskStatus(@Param("id") Long id, @Param("status") Long status, @Param("details") String details);
     void updateTaskEndTime(@Param("id") Long id, @Param("time") Date time);
 }

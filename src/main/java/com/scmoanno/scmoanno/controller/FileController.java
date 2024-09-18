@@ -59,17 +59,26 @@ public class FileController {
         }
         String realFilePath = "c:/ScmoannoResult/"+randomFileName;
         // 数据库包装
-
+        Scmoannoresult result2=filesServer.findResultByTaskName(taskName);
         Scmoannoresult result = new Scmoannoresult();
         if(Objects.equals(fileType, "configjsFile")){
+            if (result2.getConfigFile() != null) {
+                result2.deleteFile("c:\\ScmoannoResult\\" + result2.getConfigFile());
+            }
             result.setConfigFile(randomFileName);
             filesServer.updateResult1(result, taskName);
         }
         else if(Objects.equals(fileType, "datajsFile")){
+            if (result2.getDataFile() != null) {
+                result2.deleteFile("c:\\ScmoannoResult\\" + result2.getDataFile());
+            }
             result.setDataFile(randomFileName);
             filesServer.updateResult2(result, taskName);
         }
         else if(Objects.equals(fileType, "lablejsFile")){
+            if (result2.getLableFile() != null) {
+                result2.deleteFile("c:\\ScmoannoResult\\" + result2.getLableFile());
+            }
             result.setLableFile(randomFileName);
             filesServer.updateResult3(result, taskName);
         }

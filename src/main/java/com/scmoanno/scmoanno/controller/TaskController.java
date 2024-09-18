@@ -1,7 +1,10 @@
 package com.scmoanno.scmoanno.controller;
 
 import com.scmoanno.scmoanno.entity.Result;
+import com.scmoanno.scmoanno.entity.Scmoannofiles;
+import com.scmoanno.scmoanno.entity.Scmoannoresult;
 import com.scmoanno.scmoanno.entity.Scmoannotask;
+import com.scmoanno.scmoanno.servers.FilesServer;
 import com.scmoanno.scmoanno.servers.TaskServer;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +19,9 @@ import java.util.Map;
 public class TaskController {
     @Resource
     private TaskServer taskServer;
+
+    @Resource
+    private FilesServer filesServer;
 
     @RequestMapping("/insertTask")
     @CrossOrigin(origins = "*")
@@ -48,7 +54,17 @@ public class TaskController {
 
     @RequestMapping("/deleteTaskByID")
     @CrossOrigin(origins = "*")
-    public Result deleteTaskByID(@RequestParam long taskID) {
+    public Result deleteTaskByID(@RequestParam long taskID,@RequestParam String taskName) {
+        Scmoannoresult result=filesServer.findResultByTaskName(taskName);
+        if (result.getConfigFile() != null) {
+            result.deleteFile("c:\\ScmoannoResult\\" + result.getConfigFile());
+        }
+        if (result.getDataFile() != null) {
+            result.deleteFile("c:\\ScmoannoResult\\" + result.getDataFile());
+        }
+        if (result.getLableFile() != null) {
+            result.deleteFile("c:\\ScmoannoResult\\" + result.getLableFile());
+        }
         taskServer.deleteTasksByTaskId(taskID);
         return Result.success();
     }
@@ -76,8 +92,8 @@ public class TaskController {
 
     @RequestMapping("/updateTaskStatus")
     @CrossOrigin(origins = "*")
-    public Result updateTaskStatus(@RequestParam("taskID") Long taskID, @RequestParam("status") Long status) {
-        taskServer.updateTaskStatus(taskID, status);
+    public Result updateTaskStatus(@RequestParam("taskID") Long taskID, @RequestParam("status") Long status, @RequestParam("details") String details) {
+        taskServer.updateTaskStatus(taskID, status, details);
         return Result.success();
     }
 }

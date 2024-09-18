@@ -1,6 +1,8 @@
 package com.scmoanno.scmoanno.entity;
 
 
+import java.io.File;
+
 public class Scmoannoresult {
 
   private long resultId;
@@ -54,4 +56,10 @@ public class Scmoannoresult {
     this.taskName = taskName;
   }
 
+  public void deleteFile(String filePath) {
+    File file = new File(filePath);
+    if (file.exists()) {
+      file.delete();
+    }
+  }
 }
