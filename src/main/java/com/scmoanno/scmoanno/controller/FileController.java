@@ -116,8 +116,6 @@ public class FileController {
         return builder.body(FileUtils.readFileToByteArray(dFile));
     }
 
-
-
     @PostMapping("/uploadOneFile")
     @CrossOrigin(origins = "*")  // 跨域
     public Result uploadOneFile(@RequestParam("file") MultipartFile file,
@@ -155,7 +153,6 @@ public class FileController {
         // 文件操作
         file.transferTo(new File(realFilePath));  // 移动到目标文件
         return Result.success();
-
     }
 
     @RequestMapping("/insertFile")
